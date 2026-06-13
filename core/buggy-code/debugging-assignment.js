@@ -15,106 +15,164 @@ const notes = [
 
 app.get("/users", (req, res) => {
   const allUsers = users;
-  res.send(userList);
-});
+  res.send(allUsers)
+}); //done
 
 app.get("/users/:id", (req, res) => {
   const id = req.params.id;
-  const user = users.find(u => u.id === id);
+  // const user = users.find(u => u.id === Number(id));
+  const user = getUserById(id)
+
+  if(!user){
+    return res.send({message: "User not found"})
+  }
   res.send(user);
-});
+}); //done
 
 function getUserById(id) {
-  const user = users.find(u => u.id === id);
-}
+  const user = users.find(u => u.id === Number(id));
+  return user
+} //done
 
 app.get("/notes/count", (req, res) => {
-  const total = notes.lenght;
+  const total = notes.length;
   res.send({ total });
-});
+}); //done
 
-app.get("/external-data", async (req, res) => {
-  const data = fetchExternalData();
-  res.send(data);
-});
-
-app.get("/notes", (req, res) => {
-  if (notes = []) {
-    console.log("No notes found");
-  }
-  res.send(notes);
-});
-
-function generateNoteId() {
-  return Math.random() * 1000;
+function fetchExternalData() {
+  return new Promise((resolve) => {
+    setTimeout(()=>{
+      resolve("External data fetched")
+    },1000)
+  })
 }
 
-const newId = generateNoteId;
+app.get("/external-data", async (req, res) => {
+  const data = await fetchExternalData();
+  res.send(data);
+}); //done
+
+app.get("/notes", (req, res) => {
+  if (notes.length === 0) {
+    return res.send({message: "No notes found"});
+  }
+  res.send(notes);
+}); //done
+
+function generateNoteId() {
+  return Math.floor(Math.random() * 1000) ;
+}
+
+// const newId = generateNoteId();
 
 app.post("/notes", (req, res) => {
   const { title, content, userId } = req.body;
+  const newId = generateNoteId();
+  
 
-  if (!title && !content) {
-    return res.send("Invalid input");
+  if(!title || title.trim() === ""){
+    return res.send({message: "Title is required and cannot be empty"})
   }
+  if(!content){
+    return res.send({message: "Content is required"})
+  }
+  if(!userId || isNaN(Number(userId))){
+    return res.send({message: "Userid is required"})
+  }
+
+  const existingUser = users.find(u => u.id === Number(userId))
+
+  if(!existingUser){
+    return res.send({message: "User not found"})
+  }
+
+  // if (!title || !content ) {
+  //   return res.send("Invalid input");
+  // }
 
   const newNote = {
     id: newId,
     title: title,
     content: content,
-    userId: userId
+    userId: Number(userId)
   };
 
   notes.push(newNote);
   res.send(newNote);
-});
+}); //done
 
 app.delete("/notes/:id", (req, res) => {
-  const id = req.params.id;
+  const id = Number(req.params.id);
+
+  if(isNaN(id)){
+    return res.send({ message: "Invalid Id" });
+  }
   const noteIndex = notes.findIndex(n => n.id === id);
 
-  notes.splice(noteIndex, 1);
-  res.send({ message: "Note deleted" });
-});
+  if(noteIndex !== -1){
+      notes.splice(noteIndex, 1);
+      return res.send({ message: "Note deleted" });
+  }
+
+  res.send({ message: "No note to delete" });
+}); //done
 
 app.put("/users/:id", (req, res) => {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const { name } = req.body;
 
-  const user = users.find(u => u.id == id);
-  user.name = username;
+  const user = users.find(u => u.id === id);
+
+  if(!user){
+    return res.send({message : "User not found"});
+  }
+
+  if(!name || name.trim() === ""){
+    return res.send({message : "Name is empty, provide a name"});
+  }
+
+  user.name = name;
 
   res.send(user);
-});
+}); //done
 
 app.get("/user-notes/:userId", (req, res) => {
-  const userId = req.params.userId;
-  const userNotes = notes.filter(n => n.userId = userId);
+  const userId = Number(req.params.userId);
+  const userNotes = notes.filter(n => n.userId === userId);
   res.send(userNotes);
-});
+}); //done
 
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
-  if (email === "admin@test.com" || password === "123456") {
+  if (email === "admin@test.com" && password === "123456") {
     res.send({ message: "Login successful" });
   } else {
     res.send({ message: "Invalid credentials" });
   }
-});
+}); //done
 
 app.get("/profile/:id", (req, res) => {
   const id = Number(req.params.id);
-  const user = users.filter(u => u.id === id);
+  const user = users.find(u => u.id === id);
+  if(!user){
+    return res.send({message: "User not found"})
+  }
   res.send(user.name);
-});
+}); //done
 
 app.post("/sum", (req, res) => {
   const { a, b } = req.body;
-  const total = a + b;
-  res.send({ total });
-});
+  
 
-app.listen(3000, () => {
+  if(isNaN(Number(a)) || isNaN(Number(b))){
+    return res.send({message: "Invalid input"})
+  }
+  
+  const total = Number(a) + Number(b);
+  res.send({ total });
+}); //done
+
+app.listen(5000, () => {
   console.log("Server running on port 5000");
 });

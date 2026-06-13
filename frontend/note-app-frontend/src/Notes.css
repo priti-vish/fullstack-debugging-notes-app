@@ -1,0 +1,122 @@
+.app-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* MAIN AREA */
+.main {
+  padding: 20px;
+  background: #f7f7f7;
+}
+
+h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* FORM */
+.note-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.note-form input,
+.note-form textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+
+.note-form input:focus,
+.note-form textarea:focus {
+  border-color: #8008f8;
+}
+
+.note-form textarea {
+  flex: 1;
+  height: 40px;
+}
+
+.note-form button {
+  padding: 10px 15px;
+  background: #8008f8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.note-form button:hover {
+  background: #6a06d1;
+}
+
+/* GRID */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+/* CARD */
+.note-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.note-card h3 {
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.note-card p {
+  color: #555;
+}
+
+/* ACTION BUTTONS */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.actions button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* EDIT */
+.actions button:first-child {
+  background: #8008f8;
+  color: white;
+}
+
+.actions button:first-child:hover {
+  background: #6a06d1;
+}
+
+/* DELETE */
+.actions button:last-child {
+  background: #f44336;
+  color: white;
+}
+
+.actions button:last-child:hover {
+  background: #d32f2f;
+}
+
+/* EMPTY STATE */
+.empty {
+  text-align: center;
+  padding: 40px;
+  color: #777;
+}
