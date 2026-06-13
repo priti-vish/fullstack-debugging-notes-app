@@ -1,67 +1,79 @@
-# Trainee Developer Assignment
+# Full Stack Notes App (Debugging + CRUD Assignment)
 
-## Overview
-
-This assignment has 3 parts:
-
-1. Core Task (Mandatory)
-2. Notes Backend (Optional)
-3. Notes Frontend (Optional)
-
-You must complete the Core Task.
-You can choose Backend, Frontend, or both.
+This is a full stack Notes application developed as part of a technical assessment. The project includes both debugging fixes and full CRUD implementation.
 
 ---
 
-## 1. Core Task (Mandatory)
+## 🚀 Tech Stack
 
-Fix bugs in the provided code and make sure the project runs correctly.
+Frontend:
+- React (Vite)
+- JavaScript
+- CSS
 
----
-
-## 2. Backend Task (Optional)
-
-Build a Notes API with following endpoints:
-
-- POST /notes
-- GET /notes
-- GET /notes/:id
-- PUT /notes/:id
-- DELETE /notes/:id
+Backend:
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
 
 ---
 
-## 3. Frontend Task (Optional)
+## 📌 Features
 
-Build a Notes UI:
-
-- Show list of notes
+Backend:
 - Create note
-- Edit note
+- Get all notes
+- Get note by ID
+- Update note
 - Delete note
+- RESTful API structure
+- Error handling
+
+Frontend:
+- Display all notes
+- Create new notes
+- Edit notes
+- Delete notes
+- Simple responsive UI
 
 ---
 
-## Rules
+## 🐞 Debugging Task
 
-- You can use Google / ChatGPT
-- Do not copy full project from internet
-- Keep code simple and readable
+The project included fixing bugs in an existing codebase and ensuring full functionality of the application.
 
 ---
 
-## Submission
+## 🔗 API Endpoints
 
-- Push code to GitHub
-- Share repository link
+POST   /notes       - Create note  
+GET    /notes       - Get all notes  
+GET    /notes/:id   - Get single note  
+PUT    /notes/:id   - Update note  
+DELETE /notes/:id   - Delete note  
 
 ---
 
-## Evaluation Criteria
+## ⚙️ Setup Instructions
 
-We evaluate:
-- Problem solving
-- Code quality
-- Understanding of basics
-- Effort and learning ability
+Backend:
+npm install  
+npm start  
 
+Frontend:
+npm install  
+npm run dev  
+
+---
+
+## 📂 Project Structure
+
+frontend  
+backend  
+
+---
+
+## 👨‍💻 Status
+
+Completed and ready for submission.
